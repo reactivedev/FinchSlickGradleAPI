@@ -1,0 +1,58 @@
+group 'com.srilabs'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'idea'
+apply plugin: 'scala'
+
+sourceCompatibility = 1.8
+
+repositories {
+    jcenter()
+    mavenCentral()
+//    maven {
+//        name "jitpack"
+//        url "https://jitpack.io"
+//    }
+//    maven {
+//        name "twitter"
+//        url "https://maven.twttr.com/"
+//    }
+    mavenLocal()
+    ivy {
+        // URL can refer to a local directory
+        // url "${userHome}/.ivy2/local"
+        url "file:///Users/sgireddy/.ivy2/local"
+    }
+
+}
+
+dependencies {
+    // Use Scala 2.12 in our library project
+    compile 'org.scala-lang:scala-library:2.12.5'
+    compile 'com.typesafe.slick:slick_2.12:3.2.3'
+    compile 'org.apache.commons:commons-collections4:4.1'
+    compile 'org.apache.commons:commons-lang3:3.5'
+    compile 'com.h2database:h2:1.4.187'
+    compile 'com.twitter:util-cache_2.12:6.41.0'
+    compile 'com.twitter:util-collection_2.12:6.41.0'
+    compile 'com.twitter:twitter-server_2.12:18.4.0'
+    compile 'com.twitter:finagle-http_2.12:18.4.0'
+    compile 'io.circe:circe-core_2.12:0.9.3'
+    compile 'io.circe:circe-generic_2.12:0.9.3'
+    compile 'io.circe:circe-parser_2.12:0.9.3'
+    compile 'com.github.ben-manes.caffeine:caffeine:2.4.0'
+    compile 'org.scalactic:scalactic_2.12:3.0.1'
+    compile 'com.github.finagle:finch-core_2.12:0.19.0'
+    compile 'com.github.finagle:finch-circe_2.12:0.19.0'
+    compile 'com.github.finagle:finch-generic_2.12:0.19.0'
+
+
+
+    // Use Scalatest for testing our library
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.scalatest:scalatest_2.12:3.0.4'
+
+    // Need scala-xml at test runtime
+    testRuntime 'org.scala-lang.modules:scala-xml_2.12:1.0.6'
+
+}
