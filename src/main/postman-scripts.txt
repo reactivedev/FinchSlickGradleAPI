@@ -1,0 +1,46 @@
+http://127.0.0.1:8083/candidate
+
+{
+	"email": "test1@test.com",
+	"name": "john",
+	"dob": "11122232",
+	"token": "token3",
+	"createdAt": 1223434,
+	"updatedAt": -1,
+	"deletedAt": -1,
+	"id": 124
+}
+
+http://127.0.0.1:8083/candidates
+
+localhost:8083/job
+
+{
+	"recruiter": "test1@test.com",
+	"title": "SDE III",
+	"subject": "Super SDE",
+	"description": "foo bar....",
+	"keywords": "scala, akka",
+	"status": 0,
+	"createdAt": 1223434,
+	"updatedAt": -1,
+	"deletedAt": -1,
+	"id": 124
+}
+
+localhost:8083/jobs
+
+localhost:8083/interview
+
+{
+	"candidateId": 111,
+	"jobId": 11122232,
+	"startTime": 11122232,
+	"createdAt": 1223434,
+	"updatedAt": -1,
+	"deletedAt": -1,
+	"id": 125
+}
+
+
+localhost:8083/interviews
