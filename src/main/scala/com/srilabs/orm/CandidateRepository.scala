@@ -1,8 +1,10 @@
 package com.srilabs.orm
-import com.srilabs.models.Candidate
-import slick.jdbc.H2Profile.api._
+
 import com.twitter.util.{Future => TFuture}
 import com.srilabs.util.FutureUtils._
+import com.srilabs.models.Candidate
+import Profile.api._
+
 
 object CandidateRepository extends Repository[Candidate, Candidates](TableQuery[Candidates]) {
 

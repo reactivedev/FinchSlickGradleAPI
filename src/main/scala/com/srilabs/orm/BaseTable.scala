@@ -2,8 +2,8 @@ package com.srilabs.orm
 
 import java.sql.Timestamp
 import java.time.LocalDateTime
-import slick.jdbc.H2Profile.api._
 import com.srilabs.models.Entity
+import Profile.api._
 
 abstract class BaseTable[E <: Entity](tag: Tag, tableName: String) extends Table[E](tag, tableName) {
 

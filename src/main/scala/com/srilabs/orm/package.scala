@@ -1,13 +1,23 @@
 package com.srilabs
 
-
-import slick.jdbc.H2Profile.api._
+import config.Settings
 import scala.concurrent.{Await, ExecutionContext}
 import scala.concurrent.duration._
 
 package object orm {
 
-  implicit val db: Database = Database.forConfig("h2mem1")
+  private val profileToUse = Settings.profileToUse
+
+  // This limits DB support to mysql & H2
+  // TODO: Generalize so to use slick.SqlProfile dynamically instantiated based on config
+  val Profile = profileToUse match {
+    case "mysql" => slick.jdbc.MySQLProfile
+    case _ => slick.jdbc.H2Profile
+  }
+
+  import Profile.api._
+
+  implicit val db: Database = Database.forConfig("sri." + profileToUse)
   implicit val ec = ExecutionContext.global
   val timeout = 10.seconds
 

@@ -3,8 +3,8 @@ package com.srilabs.orm
 import com.srilabs.models.Entity
 import com.twitter.util.{Future => TFuture}
 import scala.concurrent.Future
-import slick.jdbc.H2Profile.api._
 import com.srilabs.util.FutureUtils._
+import Profile.api._
 
 abstract class Repository[E <: Entity, T <: BaseTable[E]](query: TableQuery[T]) {
 

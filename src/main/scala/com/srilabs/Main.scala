@@ -9,15 +9,13 @@ import io.finch.circe._
 import io.circe.generic.auto._
 import com.srilabs.api.Router._
 
+import scala.util.{Failure, Success, Try}
+
 object Main extends TwitterServer {
 
   def main(): Unit = {
 
-  // TODO: Remove after migrating to mysql (extract ddl and create a script of its own)
-    orm.createSchema()
-
     val endpoints =  candidates :+: jobs :+: interviews :+: candidate :+: interview :+: job
-
 
     val port = "127.0.0.1:8083"
 

@@ -1,8 +1,7 @@
 package com.srilabs.orm
 
-
-import slick.jdbc.H2Profile.api._
 import com.srilabs.models.Job
+import Profile.api._
 
 class Jobs(tag: Tag) extends BaseTable[Job](tag, "JOBS") {
 

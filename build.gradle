@@ -30,6 +30,8 @@ dependencies {
     // Use Scala 2.12 in our library project
     compile 'org.scala-lang:scala-library:2.12.5'
     compile 'com.typesafe.slick:slick_2.12:3.2.3'
+    compile 'com.typesafe.slick:slick-hikaricp_2.12:3.2.3'
+    compile 'com.typesafe.slick:slick-codegen_2.12:3.2.3'
     compile 'org.apache.commons:commons-collections4:4.1'
     compile 'org.apache.commons:commons-lang3:3.5'
     compile 'com.h2database:h2:1.4.191'
@@ -45,7 +47,7 @@ dependencies {
     compile 'com.github.finagle:finch-core_2.12:0.19.0'
     compile 'com.github.finagle:finch-circe_2.12:0.19.0'
     compile 'com.github.finagle:finch-generic_2.12:0.19.0'
-
+    compile 'mysql:mysql-connector-java:5.1.5'
 
 
 
@@ -56,4 +58,14 @@ dependencies {
     // Need scala-xml at test runtime
     testRuntime 'org.scala-lang.modules:scala-xml_2.12:1.0.6'
 
+}
+
+jar {
+    manifest {
+        attributes "Main-Class": "com.srilabs.Main"
+    }
+
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
 }
