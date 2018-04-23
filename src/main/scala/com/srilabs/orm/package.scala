@@ -6,20 +6,15 @@ import scala.concurrent.duration._
 
 package object orm {
 
-  private val profileToUse = Settings.profileToUse
-
-  // This limits DB support to mysql & H2
-  // TODO: Generalize so to use slick.SqlProfile dynamically instantiated based on config
-  val Profile = profileToUse match {
+  val timeout = 10.seconds
+  val Profile = Settings.db match {
     case "mysql" => slick.jdbc.MySQLProfile
     case _ => slick.jdbc.H2Profile
   }
 
   import Profile.api._
-
-  implicit val db: Database = Database.forConfig("sri." + profileToUse)
-  implicit val ec = ExecutionContext.global
-  val timeout = 10.seconds
+  implicit lazy val db: Database = getDB
+  implicit lazy val ec = ExecutionContext.global
 
   def createSchema(): Unit = {
     println("Creating Schema...")
@@ -31,4 +26,11 @@ package object orm {
     }
     Await.result(f, timeout)
   }
+
+  private def getDB: Database = {
+    val dbConfPath = "sri." + Settings.env + "." + Settings.db
+    println(dbConfPath)
+    Database.forConfig(dbConfPath)
+  }
+
 }

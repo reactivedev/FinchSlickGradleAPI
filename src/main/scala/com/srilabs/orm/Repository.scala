@@ -2,9 +2,11 @@ package com.srilabs.orm
 
 import com.srilabs.models.Entity
 import com.twitter.util.{Future => TFuture}
-import scala.concurrent.Future
+import scala.concurrent.{Await, Future}
 import com.srilabs.util.FutureUtils._
 import Profile.api._
+
+
 
 abstract class Repository[E <: Entity, T <: BaseTable[E]](query: TableQuery[T]) {
 
@@ -14,17 +16,24 @@ abstract class Repository[E <: Entity, T <: BaseTable[E]](query: TableQuery[T]) 
   def find(id: Long): Future[Option[E]] =
     db.run(query.filter(_.id === id).result.headOption)
 
-  // TODO: check if exists by composit key? How would we handle that?
-  // Best place to validate is using unique key on the DB side, outside the scope of Repository pattern
-  def insert(rec: E): TFuture[Int] =
-    db.run(query += rec).asTwitter
+  def insert(rec: E): TFuture[E] =
+    db.run(query returning query += rec)
+      .asTwitter
 
-  // TODO: check if exists
-  def update(rec: E): TFuture[Int] =
-    db.run(query += rec).asTwitter
+  def upsert(rec: E): TFuture[Option[Long]] =
+    db.run((query returning query.map(_.id)).insertOrUpdate(rec))
+      //.map(_id => rec.copy(id = Some(_id))
+      .asTwitter
 
-  // TODO: check if exists
-//  def delete(id: Long): TFuture[Int] =
-//    db.run(query.drop(id)).asTwitter
+  def delete(id: Long): TFuture[Int] =
+    db.run(query.filter(_.id === id).delete)
+      .asTwitter
+
+//  // Both MySql & H2 doesn't allow returning the whole record
+//  // slick.SlickException: This DBMS allows only a single column to be returned from an INSERT,
+//  // and that column must be an AutoInc column.
+//  def upsert(rec: E): TFuture[Option[E]] =
+//    db.run((query returning query).insertOrUpdate(rec))
+//      .asTwitter
 
 }

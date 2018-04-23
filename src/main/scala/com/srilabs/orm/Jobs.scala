@@ -12,6 +12,6 @@ class Jobs(tag: Tag) extends BaseTable[Job](tag, "JOBS") {
   def keywords = column[String]("KEYWORDS")
   def status = column[Int]("STATUS")
 
-  def * = (recruiter, title, subject, description, keywords, status, createdAt, updatedAt, deletedAt, id) <> (Job.tupled, Job.unapply)
+  def * = (recruiter, title, subject, description, keywords, status, createdAt, updatedAt.?, id.?) <> (Job.tupled, Job.unapply)
 
 }

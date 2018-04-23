@@ -4,7 +4,6 @@ import com.twitter.util.{Future => TFuture, Promise => TPromise, Return, Throw}
 import scala.concurrent.{Future => SFuture, Promise => SPromise, ExecutionContext}
 import scala.util.{Success, Failure}
 
-
 object FutureUtils {
 
 

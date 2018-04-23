@@ -8,16 +8,24 @@ import io.finch._
 import io.finch.circe._
 import io.circe.generic.auto._
 import com.srilabs.api.Router._
+import com.srilabs.config.Settings
+import com.srilabs.orm.createSchema
 
-import scala.util.{Failure, Success, Try}
 
 object Main extends TwitterServer {
 
   def main(): Unit = {
 
-    val endpoints =  candidates :+: jobs :+: interviews :+: candidate :+: interview :+: job
+    if(Settings.db == "h2") {
+      createSchema()
+    }
 
-    val port = "127.0.0.1:8083"
+    val endpoints =   echo :+: candidates :+: jobs :+: interviews :+:
+                      candidate :+: interview :+: job :+:
+                      uCandidate :+: uInterview :+: uJob :+:
+                      dCandidate :+: dInterview :+: dJob
+
+    val port = "127.0.0.1:" + Settings.port
 
     val server = Http.server
       .withAdmissionControl.concurrencyLimit(maxConcurrentRequests = 5, maxWaiters = 5)

@@ -7,12 +7,9 @@ import Profile.api._
 
 abstract class BaseTable[E <: Entity](tag: Tag, tableName: String) extends Table[E](tag, tableName) {
 
-
-  def id = column[Long]("ID", O.PrimaryKey, O.AutoInc)
   def createdAt = column[Long]("CREATED_AT")
   def updatedAt = column[Long]("UPDATED_AT")
-  def deletedAt = column[Long]("DELETED_AT")
-
+  def id = column[Long]("ID", O.PrimaryKey, O.AutoInc)
 
   //  implicit val localDateTimeToTimestamp: BaseColumnType[LocalDateTime] = MappedColumnType.base[LocalDateTime, Timestamp](
   //    l => Timestamp.valueOf(l),
