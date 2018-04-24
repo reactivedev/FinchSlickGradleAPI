@@ -27,6 +27,5 @@ RUN mkdir /usr/local/FinchSlickGradleAPIV1 && \
 
 WORKDIR /usr/local/FinchSlickGradleAPIV1
 
-# Not working from here... Need to write a batch script to be issued from docker-compose or manually
+# All set, start the application... The application will automatically create schema (i.e. create any missing tables)
 CMD ["java", "-cp", "FinchSlickGradleAPI-1.0-SNAPSHOT.jar", "com.srilabs.Main"]
-

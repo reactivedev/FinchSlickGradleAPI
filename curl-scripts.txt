@@ -1,15 +1,28 @@
 curl --request POST --header "Content-Type:application/json" \
---data '{"email": "test1@test.com", "name": "ben","dob": "11122232","token": "token3","createdAt": 1223434,"updatedAt": -1,"deletedAt": -1,"id": 124 }' \
+--data '{"email": "test1@test.com", "name": "John","dob": "11122232","token": "token3","createdAt": 1223434,"updatedAt": -1,"deletedAt": -1,"id": 124 }' \
 http://localhost:8083/candidate
-
 
 curl --request POST --header "Content-Type:application/json" \
---data '{"email": "test2@test.com", "name": "ben","dob": "11122232","token": "token3","createdAt": 1223434,"updatedAt": -1,"deletedAt": -1,"id": 125 }' \
+--data '{"email": "test2@test.com", "name": "Bob","dob": "11122235","token": "token5","createdAt": 1223434,"updatedAt": -1,"deletedAt": -1,"id": 125 }' \
 http://localhost:8083/candidate
-
 
 
 curl --request GET --header "Content-Type:application/json" http://localhost:8083/candidates
+
+curl --request PUT --header "Content-Type:application/json" \
+--data '{"email": "test1@test.com", "name": "Jon W","dob": "11122232","token": "token31","createdAt": 1223434,"updatedAt": -1,"deletedAt": -1,"id": 124 }' \
+http://localhost:8083/candidate
+
+curl --request PUT --header "Content-Type:application/json" \
+--data '{"email": "test2@test.com", "name": "Bob K","dob": "11122232","token": "token3745764","createdAt": 1223434,"updatedAt": -1,"deletedAt": -1,"id": 125 }' \
+http://localhost:8083/candidate
+
+curl --request GET --header "Content-Type:application/json" http://localhost:8083/candidates
+
+curl --request DELETE --header "Content-Type:application/json" --data 124 http://localhost:8083/candidate
+
+curl --request GET --header "Content-Type:application/json" http://localhost:8083/candidates
+
 
 curl --request POST --header "Content-Type:application/json" \
 --data '{ "recruiter": "test1@test.com", "title": "SDE III", "subject": "Super SDE", "description": "foo bar....", "keywords": "scala, akka", "status": 0, "createdAt": 1223434, "updatedAt": -1, "deletedAt": -1, "id": 124 }' \
@@ -17,11 +30,28 @@ http://localhost:8083/job
 
 curl --request GET --header "Content-Type:application/json" http://localhost:8083/jobs
 
+curl --request PUT --header "Content-Type:application/json" \
+--data '{ "recruiter": "test5@test.com", "title": "SDE V", "subject": "Super Duper SDE", "description": "foo bar....!", "keywords": "scala, akka", "status": 0, "createdAt": 1223434, "updatedAt": -1, "deletedAt": -1, "id": 124 }' \
+http://localhost:8083/job
+
+curl --request GET --header "Content-Type:application/json" http://localhost:8083/jobs
+
+curl --request DELETE --header "Content-Type:application/json" --data 124 http://localhost:8083/job
 
 curl --request POST --header "Content-Type:application/json" \
 --data '{ "candidateId": 111, "jobId": 11122232, "startTime": 11122232, "createdAt": 1223434, "updatedAt": -1, "deletedAt": -1,	"id": 125 }' \
 http://localhost:8083/interview
 
 curl --request GET --header "Content-Type:application/json" http://localhost:8083/interviews
+
+
+curl --request PUT --header "Content-Type:application/json" \
+--data '{ "candidateId": 115, "jobId": 11122233, "startTime": 11122232, "createdAt": 1223434, "updatedAt": -1, "deletedAt": -1,	"id": 125 }' \
+http://localhost:8083/interview
+
+curl --request GET --header "Content-Type:application/json" http://localhost:8083/interviews
+
+curl --request DELETE --header "Content-Type:application/json" --data 125 http://localhost:8083/interview
+
 
 

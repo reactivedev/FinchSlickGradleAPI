@@ -16,9 +16,7 @@ object Main extends TwitterServer {
 
   def main(): Unit = {
 
-    if(Settings.db == "h2") {
-      createSchema()
-    }
+    createSchema()
 
     val endpoints =   echo :+: candidates :+: jobs :+: interviews :+:
                       candidate :+: interview :+: job :+:

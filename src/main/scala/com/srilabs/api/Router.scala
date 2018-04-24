@@ -94,7 +94,7 @@ object Router {
     }
   }
 
-  val uInterview: Endpoint[Option[Long]] = post("interview" :: jsonBody[Interview]) { c : Interview =>
+  val uInterview: Endpoint[Option[Long]] = put("interview" :: jsonBody[Interview]) { c : Interview =>
     FuturePool.unboundedPool {
       val updated = c.copy(updatedAt = Some(now))
       Ok(handle(interviewRepo.upsert(updated)))
